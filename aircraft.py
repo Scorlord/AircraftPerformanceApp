@@ -49,6 +49,9 @@ class Aircraft:
     def zeroLiftDrag(self):
         return (self.maxDragSea() - self.inducedDrag())
 
+    def performanceWeight(self):
+        return 0
+
 
     ##def maxLiftDrag(self):
 
