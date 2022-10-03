@@ -36,31 +36,43 @@ class AircraftFactory:
             Attacker("A-7", "Corsair", "USA", 1967, 14.06, 11.8, 34.83, 8676, 19050, 6616.1, 66.7, 74.59, 308.64, "NACA 65A007", 13607.77, 0, 6)
          ]
 
-    def getAircraft(self, modelName):
+    def getModelName(self, modelName):
         for aircraft in self.aircraftList:
             if aircraft.modelName == modelName:
                 return aircraft
         return None
 
-    def getAircraftByHeaviestMTOW(self):
+    def getNickName(self, nickName):
+        for aircraft in self.aircraftList:
+            if aircraft.nickName == nickName:
+                return aircraft.nickName
+        return None
+
+    def getLightestMTOW(self):
+        lightest = None
+        for aircraft in self.aircraftList:
+            if lightest == None or aircraft.maxTakeOffWeight < lightest.maxTakeOffWeight:
+                lightest = aircraft
+        return None
+
+    def getHeaviestMTOW(self):
         heaviest = None
         for aircraft in self.aircraftList:
             if heaviest == None or aircraft.maxTakeOffWeight > heaviest.maxTakeOffWeight:
                 heaviest = aircraft
-        return heaviest
+        return None
 
-    def getAircraftByMaxSpeed(self):
+    def getFastedMaxSpeed(self):
         fastest = None
         for aircraft in self.aircraftList:
             if fastest == None or aircraft.maxSpeedSea > fastest.maxSpeedSea:
                 fastest = aircraft
-        return fastest
+        return None
 
-    def getAicraftBestUsefulLoad(self):
+    def getBestUsefulLoad(self):
         BestUsefulLoad = None
         for aircraft in self.aircraftList:
             if BestUsefulLoad == None or (aircraft.maxTakeOffWeight - aircraft.emptyWeight  - aircraft.maxInternalfuel) > (aircraft.maxTakeOffWeight - aircraft.emptyWeight - aircraft.maxInternalfuel):
                 BestUsefulLoad = aircraft
-        return BestUsefulLoad
+        return None
 
-  
