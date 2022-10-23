@@ -24,6 +24,8 @@ def selectAircraft():
             print("Search able options:")
             print(selectionList)
             continue
+        elif selectMethod == "back":
+            return
         elif selectMethod == "Model Name":
             modelName = input("Enter model number: ")
             selectedAircraft = factory.getModelName(modelName)
@@ -79,12 +81,15 @@ while True:
         exit()
     elif command == "select":
         aircraft = selectAircraft()
-        print("Selected aircraft is " + aircraft.modelName + " " + aircraft.nickName + ".")
-        continue
+        factory.printAircraft(aircraft)
     elif command == "Stat Display":
-        aircraft = selectAircraft()
-        print(aircraft.aircraftList)
+        print("Model Name: _____ | Nickname: _____ | Nation of origin: _____ | Introduction year: _____ ")
+        factory.printAicraftList()
         continue
+    elif command == "compare":
+        compareAircraft = selectAircraft()
+        if compareAircraft != None:
+            print("Selected aircraft is " + compareAircraft.modelName + " " + compareAircraft.nickName + ".")
     elif command == "check":
         if aircraft == None:
             print("No aircraft selected, please select to continue.")
