@@ -24,7 +24,7 @@ class AircraftFactory:
             Fighter("F7U", "Cutlass", "USA", 1951, 12.59, 12.10, 46.10, 8260.00, 14353.00, 4768.53, 40.00, 53.50, 1122.00, "CVA 4", 10234.4, 14, 6),
             Fighter("FJ1", "Fury", "USA", 1947, 10.48, 11.63, 20.50, 4010.00, 7076.00, 3162.00, 18.00, 54.26, 236.62, "NACA 64-112", 6856, 0, 7),
             Fighter("FJ2", "Fury", "USA", 1954, 11.46, 11.32, 26.80, 5353.00, 8523.00, 2958.00, 27.00, 50.82, 300.92, "NACA 0012", 6407, 0, 7),
-            Bomber("B-45", "Tornado", "USA", 1948, 22.96, 27.13, 109.2, 20726, 41628, 9974.5, 92, 59.156, 252.57, "NACA 66–215", 36930.58, 0, 2),
+            Bomber("B.-45", "Tornado", "USA", 1948, 22.96, 27.13, 109.2, 20726, 41628, 9974.5, 92, 59.156, 252.57, "NACA 66–215", 36930.58, 0, 2),
             Bomber("B-47", "Stratojet", "USA", 1951, 32.64, 35.36, 132.7, 36287, 100244, 29357.6, 192, 61.73, 233.54, "NACA 64A(.225)12", 37194, 0, 2),
             Bomber("B-52", "Stratofortress", "USA", 1955, 48.5, 56.4, 370, 83250, 221323, 105189.9, 608, 54.01, 167.63, "NACA 63A219.3", 102058, 0, 2),
             Bomber("B-57", "Canaberra", "USA", 1959, 20, 19.5, 89, 12285, 24365, 6705.91, 64.2, 47.83, 266.67, "RAE/D 12% symm", 12700.59, 0, 2),
@@ -45,34 +45,55 @@ class AircraftFactory:
     def getNickName(self, nickName):
         for aircraft in self.aircraftList:
             if aircraft.nickName == nickName:
-                return aircraft.nickName
+                return aircraft
         return None
 
     def getLightestMTOW(self):
         lightest = None
         for aircraft in self.aircraftList:
             if lightest == None or aircraft.maxTakeOffWeight < lightest.maxTakeOffWeight:
-                lightest = aircraft
+                return aircraft
         return None
 
     def getHeaviestMTOW(self):
         heaviest = None
         for aircraft in self.aircraftList:
             if heaviest == None or aircraft.maxTakeOffWeight > heaviest.maxTakeOffWeight:
-                heaviest = aircraft
-        return None
+                return aircraft
+        return heaviest
 
     def getFastedMaxSpeed(self):
         fastest = None
         for aircraft in self.aircraftList:
             if fastest == None or aircraft.maxSpeedSea > fastest.maxSpeedSea:
-                fastest = aircraft
+                return aircraft
         return None
 
     def getBestUsefulLoad(self):
         BestUsefulLoad = None
         for aircraft in self.aircraftList:
             if BestUsefulLoad == None or (aircraft.maxTakeOffWeight - aircraft.emptyWeight  - aircraft.maxInternalfuel) > (aircraft.maxTakeOffWeight - aircraft.emptyWeight - aircraft.maxInternalfuel):
-                BestUsefulLoad = aircraft
+                return aircraft
         return None
 
+    def getSlowestMaxSpeed(self):
+        slowest = None
+        for aircraft in self.aircraftList:
+            if slowest == None or aircraft.maxSpeedSea < slowest.maxSpeedSea:
+                return aircraft
+        return None
+
+    def getOldestIntroDate(self):
+        oldest = None
+        for aircraft in self.aircraftList:
+            if oldest == None or aircraft.year > oldest.year:
+                return aircraft
+        return None
+
+    def getNewestIntoDate(self):
+        newest = None
+        for aircraft in self.aircraftList:
+            if newest == None or aircraft.year > newest.year:
+                return aircraft
+        return None
+    
