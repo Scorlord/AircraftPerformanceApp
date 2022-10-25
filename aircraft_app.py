@@ -18,33 +18,33 @@ def selectAircraft():
     while selectedAircraft == None:
         selectMethod = input("Enter selection method, exit to quit, or help for list of selection options: ")
         selectionList = ["Model Name", "Nickname", "Heaviest", "Lightest", "Slowest", "Best Useful Load", "Fastest", "Oldest", "Newest"]
-        if selectMethod == "exit":
+        if selectMethod.lower() == "exit":
             exit()
-        elif selectMethod == "help":
+        elif selectMethod.lower() == "help":
             print("Search able options:")
             print(selectionList)
             continue
-        elif selectMethod == "back":
+        elif selectMethod.lower() == "back":
             return
-        elif selectMethod == "Model Name":
-            modelName = input("Enter model number: ")
+        elif selectMethod.lower() == "model name":
+            modelName = input("Enter model number: ").upper()
             selectedAircraft = factory.getModelName(modelName)
-        elif selectMethod == "Nickname":
-            nickName = input("Enter nickname: ")
+        elif selectMethod.lower() == "nickname":
+            nickName = input("Enter nickname: ").title()
             selectedAircraft = factory.getNickName(nickName)
-        elif selectMethod == "Heaviest":
+        elif selectMethod.lower() == "heaviest":
             selectedAircraft = factory.getHeaviestMTOW()
-        elif selectMethod == "Lightest":
+        elif selectMethod.lower() == "lightest":
             selectedAircraft = factory.getLightestMTOW()
-        elif selectMethod == "Best Useful Load":
+        elif selectMethod.lower() == "best useful load":
             selectedAircraft = factory.getBestUsefulLoad()
-        elif selectMethod == "Fastest":
+        elif selectMethod.lower() == "fastest":
             selectedAircraft = factory.getFastedMaxSpeed()
-        elif selectMethod == "Slowest":
+        elif selectMethod.lower() == "slowest":
             selectedAircraft = factory.getSlowestMaxSpeed()
-        elif selectMethod == "Oldest":
+        elif selectMethod.lower() == "oldest":
             selectedAircraft = factory.getOldestIntroDate()
-        elif selectMethod == "Newest":
+        elif selectMethod.lower() == "newest":
             selectedAircraft = factory.getNewestIntroDate()
         else:
             print("Not a valid method.")
@@ -77,24 +77,25 @@ def checkPerformanceSpeed():
 while True:
     aircraft = None
     command = input("Enter Command:")
-    if command == "exit":
+    if command.lower() == "exit":
         exit()
-    elif command == "select":
+    elif command.lower() == "select":
         aircraft = selectAircraft()
         factory.printAircraft(aircraft)
-    elif command == "Stat Display":
+    elif command == "list aircraft":
         print("Model Name: _____ | Nickname: _____ | Nation of origin: _____ | Introduction year: _____ ")
         factory.printAicraftList()
         continue
-    elif command == "compare":
+    elif command.lower() == "compare":
         compareAircraft = selectAircraft()
         if compareAircraft != None:
             print("Selected aircraft is " + compareAircraft.modelName + " " + compareAircraft.nickName + ".")
-    elif command == "check":
+    elif command.lower() == "check":
         if aircraft == None:
             print("No aircraft selected, please select to continue.")
             continue
-        performanceWeight = round((aircraft.maxTakeOffWeight * .8),2)  ## desired weight in kilograms
-        performanceSpeed = round((aircraft.minSpeedSea * 2),2)   ## desired speed in meters per second  
+        speed = checkPerformanceSpeed()
+        weight = checkPerformanceWeight()
+        print(f'Model Name: {aircraft.modelName} | Performance Speed: {aircraft.nickName} | Performance Weight: {aircraft.nation}')
 
 

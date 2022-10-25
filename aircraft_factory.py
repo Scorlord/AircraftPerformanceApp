@@ -86,7 +86,7 @@ class AircraftFactory:
     def getOldestIntroDate(self):
         oldest = None
         for aircraft in self.aircraftList:
-            if oldest == None or aircraft.year > oldest.year:
+            if oldest == None or aircraft.year < oldest.year:
                 oldest = aircraft
         return oldest
 
@@ -98,9 +98,15 @@ class AircraftFactory:
         return newest
     
     def printAircraft(self, aircraft):
-        print(f' Model Name: {aircraft.modelName} | Nickname: {aircraft.nickName} | Nation of origin: {aircraft.nation} | Introduction year: {aircraft.year}')
+        print(f'Model Name: {aircraft.modelName} | Nickname: {aircraft.nickName} | Nation of origin: {aircraft.nation} | Introduction year: {aircraft.year}')
 
     def printAicraftList(self):
         for aircraft in self.aircraftList:
             self.printAircraft(aircraft)
 
+
+
+    #def getIndexedAircraftList(self, aircraft):
+        #indexedAircraftList = []
+        #for i in indexedAircraftList:
+        
