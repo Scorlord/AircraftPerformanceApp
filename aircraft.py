@@ -49,6 +49,9 @@ class Aircraft:
     def zeroLiftDrag(self):
         return (self.maxDragSea() - self.inducedDrag())
 
+    def energyManeuverability(self):
+        return (self.maxSpeedSea * ((self.thrust+self.afterburner) - self.maxDragSea()) / self.maxTakeOffWeight)
+
     def performanceWeight(self):
         return 0
 
@@ -76,4 +79,7 @@ class Bomber(Aircraft):
     pass
 
 class Trainer(Aircraft):
+    pass
+
+class Recon(Aircraft):
     pass

@@ -1,15 +1,16 @@
 from select import select
 from aircraft_factory import AircraftFactory
+from aircraft_app import aircraft
 from ast import If
 import math
 
 factory = AircraftFactory()
-aircraft = factory.getHeaviestMTOW()
+aircraft = selectAircraft()
 performanceWeight = round((aircraft.maxTakeOffWeight * .8),2)
-performanceSpeed = round((aircraft.minSpeedSea * 2),2)
+performanceSpeed = round((aircraft.maxSpeedSea * 1),2)
 
 def bestTurnDyanmicPressure(wingArea, thrust, zeroLiftDrag, inducedDrag, maxLift):
-    return ((1 / wingArea) * (thrust / (zeroLiftDrag + inducedDrag * (maxLift**2))))*100
+    return ( (1 / wingArea) * (thrust / (zeroLiftDrag + inducedDrag * (maxLift**2) ) ) )*100
 bestTurnDyanmicPressureAns = bestTurnDyanmicPressure(wingArea = aircraft.wingArea, thrust = (aircraft.thrust + aircraft.afterburner), zeroLiftDrag = aircraft.zeroLiftDrag(), inducedDrag = aircraft.inducedDrag(), maxLift = aircraft.maxLift())
 
 def bestTurnSpeed(dynamicPressure):
@@ -44,20 +45,26 @@ def performanceWeightPercentage(weight, mtow):
     return (weight / mtow) * 100
 weightPercentage = round(performanceWeightPercentage(weight = performanceWeight, mtow = aircraft.maxTakeOffWeight), 0)
 
-print(f'The {aircraft.modelName} {aircraft.nickName} was made in the {aircraft.nation} and was introduced in {aircraft.year}. The {aircraft.nickName} uses a {aircraft.airFoil} airfoil, which has a max sea level speed of {aircraft.maxSpeedSea} m/s, and stalls at {aircraft.minSpeedSea} m/s.')
-print(f'With an empty weight of {aircraft.emptyWeight} kg, and max-take-off-weight of {aircraft.maxTakeOffWeight} kg, which gives it a useful load of {aircraft.maxTakeOffWeight - aircraft.emptyWeight} k/g. Minus the max internal fuel load of {aircraft.maxInternalfuel} kg, allows it to carry {aircraft.maxTakeOffWeight - aircraft.emptyWeight - aircraft.maxInternalfuel} kg mission load.')
-print(f'If the {aircraft.nickName} is at a speed of {performanceSpeed} m/s, and has a weight of {performanceWeight} kg({weightPercentage}% of MTOW) we can determine the following.')
+#print(f'The {aircraft.modelName} {aircraft.nickName} was made in the {aircraft.nation} and was introduced in {aircraft.year}. The {aircraft.nickName} uses a {aircraft.airFoil} airfoil, which has a max sea level speed of {aircraft.maxSpeedSea} m/s, and stalls at {aircraft.minSpeedSea} m/s.')
+#print(f'With an empty weight of {aircraft.emptyWeight} kg, and max-take-off-weight of {aircraft.maxTakeOffWeight} kg, which gives it a useful load of {aircraft.maxTakeOffWeight - aircraft.emptyWeight} k/g. Minus the max internal fuel load of {aircraft.maxInternalfuel} kg, allows it to carry {aircraft.maxTakeOffWeight - aircraft.emptyWeight - aircraft.maxInternalfuel} kg mission load.')
+#print(f'If the {aircraft.nickName} is at a speed of {performanceSpeed} m/s, and has a weight of {performanceWeight} kg({weightPercentage}% of MTOW) we can determine the following.')
     
-if instantTurnThrustRequiredAns > (aircraft.thrust + aircraft.afterburner):
-    print(f'That the {aircraft.modelName} has an instant turn rate of {instantTurnRateAns} degrees per second, and instant turn radius of {instantTurnradiusAns} meters, which is higher than its substained turn rate.')
-    print(f'Where its susbtained turn occurs at {bestTurnSpeedAns} m/s, giving it a radius of {bestTurnRadiusAns} meters, and turn rate of {bestTurnRateAns} degrees per second.')
-    exit()
+#if instantTurnThrustRequiredAns > (aircraft.thrust + aircraft.afterburner):
+    #print(f'That the {aircraft.modelName} has an instant turn rate of {instantTurnRateAns} degrees per second, and instant turn radius of {instantTurnradiusAns} meters, which is higher than its substained turn rate.')
+    #print(f'Where its susbtained turn occurs at {bestTurnSpeedAns} m/s, giving it a radius of {bestTurnRadiusAns} meters, and turn rate of {bestTurnRateAns} degrees per second.')
+    #exit()
 
-if instantTurnThrustRequiredAns < (aircraft.thrust + aircraft.afterburner):
-    print(f'That the {aircraft.modelName} has a substained turn rate of {instantTurnRateAns} degrees per second, and substained turn radius of {instantTurnradiusAns} meters, which is lower than its best turn rate.')
-    print(f'Where its best susbtained turn rate occurs at {bestTurnSpeedAns} m/s. Giving it a turn radius of {bestTurnRadiusAns} meters, at a turn rate of {bestTurnRateAns} degrees per second.')
-    exit()
+#if instantTurnThrustRequiredAns < (aircraft.thrust + aircraft.afterburner):
+    #print(f'That the {aircraft.modelName} has a substained turn rate of {instantTurnRateAns} degrees per second, and substained turn radius of {instantTurnradiusAns} meters, which is lower than its best turn rate.')
+    #print(f'Where its best susbtained turn rate occurs at {bestTurnSpeedAns} m/s. Giving it a turn radius of {bestTurnRadiusAns} meters, at a turn rate of {bestTurnRateAns} degrees per second.')
+    #exit()
 
-if instantTurnThrustRequiredAns == (aircraft.thrust + aircraft.afterburner): 
-    print(f'That the {aircraft.modelName} has a substained turn rate of {instantTurnRateAns} degrees per second, and substained turn radius of {instantTurnradiusAns} meters.')
-    exit()
+#if instantTurnThrustRequiredAns == (aircraft.thrust + aircraft.afterburner): 
+    #print(f'That the {aircraft.modelName} has a substained turn rate of {instantTurnRateAns} degrees per second, and substained turn radius of {instantTurnradiusAns} meters.')
+    #exit()
+
+print(f'{aircraft.modelName}')
+print(f'{aircraft.minSpeedSea} m/s stall')
+print(f'{performanceSpeed} m/s actual')
+print(f'{instantTurnRateAns} dps')
+print(f'{instantTurnradiusAns} m' )
